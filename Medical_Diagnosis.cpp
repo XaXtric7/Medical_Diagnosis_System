@@ -135,7 +135,6 @@ void displayRemedy(const string &disease, const pair<string, string> &remedy)
 
 map<string, pair<string, string>> suggestRemedy(const vector<string> &diseases, int age)
 {
-    // Your implementation of suggestRemedy function
     // This is just a placeholder for demonstration
     map<string, pair<string, string>> remedies = {
         {"Mild cold", {"Take Rest, drink a lot of fluids, Run a cool-mist humidifier", age <= 10 ? "Cold syrup,Use nasal saline,\nJustkof D Junior Composition: Dextromethorphan + Phenylephrine 5mg + CPM 2mg" : "High power cold tablets,\nPEACEMOL-D Tablets Composition: Paracetamol & Domperidone Tablets\nASTADIN Tablets Composition: Loratadine Tablets"}},
@@ -160,10 +159,11 @@ map<string, pair<string, string>> suggestRemedy(const vector<string> &diseases, 
 
 vector<string> guessDisease(const vector<string> &symptoms, double temperature, double height, int age)
 {
-    // Your implementation of guessDisease function
     // This is just a placeholder for demonstration
     vector<string> guessedDiseases;
     bool hasFever = false;
+
+    // Trigger Diseases here after adding
 
     for (const string &symptom : symptoms)
     {
@@ -186,6 +186,9 @@ vector<string> guessDisease(const vector<string> &symptoms, double temperature, 
         guessedDiseases.push_back("Severe fever");
         hasFever = true;
     }
+
+    // If a person is healthy can be triggered when temperature is below "Mild cold" region and writting "done"
+
     if (!hasFever)
     {
         cout << "\nIt seems you don't have a cold or a fever" << endl;
