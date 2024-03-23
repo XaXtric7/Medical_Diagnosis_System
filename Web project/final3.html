@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Diagnosis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            /* Light gray background */
+            background-image: linear-gradient(45deg, #ffffff 25%, transparent 25%), linear-gradient(-45deg, #ffffff 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ffffff 75%), linear-gradient(-45deg, transparent 75%, #ffffff 75%);
+            background-size: 40px 40px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2,
+        h3,
+        p {
+            margin: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .diagnosis {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Welcome to Medical Diagnosis System</h2>
+        <br>
+        <form id="diagnosisForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required><br>
+            <label for="age">Age:</label>
+            <input type="number" id="age" required><br>
+            <label for="gender">Gender:</label>
+            <select id="gender" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select><br>
+            <label for="temperature">Body Temperature (°F):</label>
+            <input type="number" id="temperature" required><br>
+            <label for="symptoms">Symptoms:</label>
+            <textarea id="symptoms" rows="4" required></textarea><br>
+            <button type="submit">Get Diagnosis</button>
+        </form>
+        <div class="diagnosis" id="output">
+            <!-- Diagnosis result will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("diagnosisForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var name = document.getElementById("name").value;
+            var age = parseInt(document.getElementById("age").value);
+            var gender = document.getElementById("gender").value;
+            var temperature = parseFloat(document.getElementById("temperature").value);
+            var symptoms = document.getElementById("symptoms").value;
+
+            // Perform diagnosis and display result here
+            // For demonstration purpose, let's just display entered data
+            var diagnosisResult = "<h3>Diagnosis Result for " + name + ":</h3>";
+            diagnosisResult += "<p>Age: " + age + "</p>";
+            diagnosisResult += "<p>Gender: " + gender + "</p>";
+            diagnosisResult += "<p>Body Temperature: " + temperature + "°C</p>";
+            diagnosisResult += "<p>Symptoms: " + symptoms + "</p>";
+
+            // Temperature-based diagnosis
+            if (temperature >= 96 && temperature <= 100) {
+                diagnosisResult += "<h3>Temperature-Based Diagnosis:</h3>";
+                diagnosisResult += "<p>Mild Cold</p>";
+            } else if (temperature > 100) {
+                diagnosisResult += "<h3>Temperature-Based Diagnosis:</h3>";
+                diagnosisResult += "<p>Severe Fever</p>";
+            } else if (temperature < 96 && symptoms === "none") {
+                diagnosisResult += "<h3>Temperature-Based Diagnosis:</h3>";
+                diagnosisResult += "<p>It seems you don't have a cold or a fever. We are glad to know that you are healthy. Here are some suggestions for you to avoid unnecessary illness:</p>";
+                diagnosisResult += "<ol>";
+                diagnosisResult += "<li>Maintain Good Hygiene</li>";
+                diagnosisResult += "<li>Eat a Balanced Diet</li>";
+                diagnosisResult += "<li>Stay Hydrated</li>";
+                diagnosisResult += "<li>Get Regular Exercise</li>";
+                diagnosisResult += "<li>Get Adequate Sleep</li>";
+                diagnosisResult += "</ul>";
+            }
+
+            // Display specific remedies and medications for different symptoms
+            if (symptoms.toLowerCase().includes("mild cold")) {
+                diagnosisResult += "<h3>Remedies:(mild cold)</h3>";
+                diagnosisResult += "<p>Take Rest, drink a lot of fluids, Run a cool-mist humidifier</p>";
+
+                if (age < 10) {
+                    diagnosisResult += "<h3>Medication:(mild cold)</h3>";
+                    diagnosisResult += "<p>Cold syrup, Use nasal saline, Justkof D Junior Composition: Dextromethorphan + Phenylephrine 5mg + CPM 2mg</p>";
+                } else {
+                    diagnosisResult += "<h3>Medication:(mild cold)</h3>";
+                    diagnosisResult += "<p>High power cold tablets, PEACEMOL-D Tablets Composition: Paracetamol & Domperidone Tablets, ASTADIN Tablets Composition: Loratadine Tablets</p>";
+                }
+            }
+
+            if (symptoms.toLowerCase().includes("severe fever")) {
+                diagnosisResult += "<h3>Remedies:(severe fever)</h3>";
+                diagnosisResult += "<p>Take acetaminophen or ibuprofen, drink fluids, take rest, if it gets severe take medical attention ASAP</p>";
+
+                if (age < 10) {
+                    diagnosisResult += "<h3>Medication:(severe fever)</h3>";
+                    diagnosisResult += "<p>Fever syrup (Tylenol, others), if your child is age 6 months or older, ibuprofen (Advil, Motrin, others) is OK, too.</p>";
+                } else {
+                    diagnosisResult += "<h3>Medication:(severe fever)</h3>";
+                    diagnosisResult += "<p>High power fever tablets: acetaminophen (Tylenol, others), ibuprofen (Advil, Motrin IB, others) or aspirin. Read the label carefully for proper dosage, and be careful not to take more than one medication containing acetaminophen, such as some cough and cold medicines</p>";
+                }
+            }
+            if (symptoms.toLowerCase().includes("headache")) {
+                diagnosisResult += "<h3>Remedies:(headache)</h3>";
+                diagnosisResult += "<p>Take pain relievers such as ibuprofen or acetaminophen, rest in a quiet, dark room, drink water, limit alcohol, try essential oils</p>";
+
+                if (age < 10) {
+                    diagnosisResult += "<h3>Medication:(headache)</h3>";
+                    diagnosisResult += "<p>Pain relief syrup, intake of Riboflavin, Magnesium, Coenzyme Q10, Vitamin D</p>";
+                } else {
+                    diagnosisResult += "<h3>Medication:(headache)</h3>";
+                    diagnosisResult += "<p>High power pain relief tablets like Acetaminophen, Aspirin, Fenoprofen</p>";
+                }
+            }
+
+            if (symptoms.toLowerCase().includes("stomachache")) {
+                diagnosisResult += "<h3>Remedies:(stomachache)</h3>";
+                diagnosisResult += "<p>Avoid spicy or fatty foods, drink herbal tea, take antacids if necessary, lemon water, intake of ginger in tea, cinnamon, cumin, banana can give relief</p>";
+
+                if (age < 10) {
+                    diagnosisResult += "<h3>Medication:(stoamachache)</h3>";
+                    diagnosisResult += "<p>Stomachache syrup, rubbing a child’s tummy or having a distraction, such as reading a book, can sometimes ease the pain. Give paracetamol or ibuprofen if your child is in pain or is miserable. If ibuprofen causes a stomach upset, offer your child some food or milk.</p>";
+                } else {
+                    diagnosisResult += "<h3>Medication:(stomachache)</h3>";
+                    diagnosisResult += "<p>High power stomachache tablets like Aztreonam, Bismuth Subsalicylate, Budesonide etc. If pain becomes severe, please refer to your nearest doctor</p>";
+                }
+            }
+
+            // Add more conditions for other symptoms if needed
+
+            document.getElementById("output").innerHTML = diagnosisResult;
+        });
+    </script>
+</body>
+
+</html>
