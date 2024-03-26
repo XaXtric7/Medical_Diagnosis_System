@@ -30,7 +30,7 @@ DiagnosisWidget::DiagnosisWidget(QWidget *parent) : QWidget(parent) {
     mainLayout->addWidget(welcomeLabel);
 
     // Adding logo to the application
-    QPixmap logoPixmap("C:/Users/sarth/OneDrive/Pictures/Screenshots/qt1.PNG"); // Load the logo from resources
+    QPixmap logoPixmap("C:/Users/sarth/OneDrive/Pictures/Screenshots/qt1.JPG"); // Load the logo from resources
     QLabel *logoLabel = new QLabel(this);
     logoLabel->setPixmap(logoPixmap.scaled(200, 200, Qt::KeepAspectRatio)); // Scale the logo
     logoLabel->setAlignment(Qt::AlignCenter);
